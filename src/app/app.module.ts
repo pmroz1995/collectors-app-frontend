@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import {HttpClientModule} from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { CoinService } from './coin.service';
+import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -10,7 +12,8 @@ import { CoinService } from './coin.service';
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule, 
+    FormsModule
   ],
   providers: [CoinService],
   bootstrap: [AppComponent]
