@@ -71,7 +71,7 @@
                                                     <h3><a href="#">{{coin.coinName}}</a></h3>
                                                     <div class="meta">
                                                         <div class="organizers">
-                                                            <a href="#">Aslan Lingker</a>
+                                                            <a href="#">waga: {{coin.weight}}</a>
                                                         </div>
                                                         <div class="categories">
                                                             <a href="#">Inspire</a>
@@ -99,6 +99,7 @@
                             </table>
                         </div>
                     </div>
+                    
                 </div>
             </div>
             <!-- /col end-->
@@ -188,7 +189,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Zamknij</button>
-          <button type="button" (click)="onDeletCoin(deleteCoin.id)" class="btn btn-primary">Usuń</button>
+          <button type="button" (click)="onDeletCoin(deleteCoin.id)" class="btn btn-primary" data-dismiss="modal" >Usuń</button>
         </div>
       </div>
     </div>

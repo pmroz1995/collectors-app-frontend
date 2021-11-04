@@ -16,6 +16,10 @@ export class AppComponent implements OnInit{
 
   constructor(private coinService: CoinService){}
 
+  public refresh(): void {
+    window.location.reload();
+  }
+
   ngOnInit() {
     this.getCoins();
   }
@@ -46,7 +50,7 @@ export class AppComponent implements OnInit{
     }
     if (mode === 'delete') {
       this.deleteCoin = coin;
-      button.setAttribute('data-target', '#deleteModal');
+      button.setAttribute('data-target', '#deleteModal');  
     }
     container?.appendChild(button);
     button.click();
@@ -69,7 +73,7 @@ export class AppComponent implements OnInit{
     document.getElementById("add-coin-button-id")?.click();
     this.coinService.addCoins(addForm.value).subscribe(
       (response: Coin) => {
-        this.coinService.getCoins();
+        this.getCoins();
         console.log(response);
         addForm.reset();
       },
@@ -85,13 +89,13 @@ export class AppComponent implements OnInit{
     this.coinService.deleteCoin(coinId).subscribe(
       (response: void) => {
         console.log(response);
-      },
+        },
       (error: HttpErrorResponse) => {
         alert(error.message);
       }
     );
-
-  }
-
+    this.refresh()
+    this.getCoins()
+  }  
 
 }
