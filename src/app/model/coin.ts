@@ -4,6 +4,7 @@ export interface Coin {
     weight: number;
     ore: string;
     dateOfProduction: string;
+    prizePln: number;
     imageUrl: string;
     coinCode: string;
 }

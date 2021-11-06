@@ -36,21 +36,20 @@
             <div class="col-lg-12">
                 <ul class="nav custom-tab" id="myTab" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active show" id="home-taThursday" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Monety</a>
+                        <a class="nav-link active show" id="coin-tab" data-toggle="tab" href="#coin" role="tab" aria-selected="true">Monety</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Znaczki</a>
+                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#stamp" role="tab" aria-selected="false">Znaczki</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Zegraki</a>
+                        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#watch" role="tab" aria-controls="contact" aria-selected="false">Zegraki</a>
                     </li>
                 </ul>
                 <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade active show" id="home" role="tabpanel">
+                    <div class="tab-pane fade active show" id="coin" role="tabpanel">
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>
-                                    
                                 </thead>
                                 <tbody>
                                     <div *ngFor="let coin of coins">
@@ -68,16 +67,13 @@
                                             </td>
                                             <td>
                                                 <div class="event-wrap">
-                                                    <h3><a href="#">{{coin.coinName}}</a></h3>
+                                                    <h3>{{coin.coinName}}</h3>
                                                     <div class="meta">
                                                         <div class="organizers">
-                                                            <a href="#">waga: {{coin.weight}}</a>
-                                                        </div>
-                                                        <div class="categories">
-                                                            <a href="#">Inspire</a>
+                                                            <h6><p>waga: {{coin.weight}} gram<br></p></h6>
                                                         </div>
                                                         <div class="time">
-                                                            <span>05:35 AM - 08:00 AM 2h 25'</span>
+                                                            <h6><p>prize: {{coin.prizePln}} pln</p></h6>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -99,7 +95,106 @@
                             </table>
                         </div>
                     </div>
-                    
+                    <div class="tab-pane fade active hidden" id="stamp" role="tabpanel">
+                      <div class="table-responsive">
+                          <table class="table">
+                              <thead>
+                                  
+                              </thead>
+                              <tbody>
+                                  <div *ngFor="let stamp of stamps">
+                                      <!-- przejście pętlą po pracownikach -->
+                                      <tr class="inner-box">
+                                          <th scope="row">
+                                              <div class="event-date">
+                                                  <p>{{stamp.dateOfProduction}}</p>
+                                              </div>
+                                          </th>
+                                          <td>
+                                              <div class="event-img">
+                                                  <img src="{{stamp.imageUrl}}" alt="" />
+                                              </div>
+                                          </td>
+                                          <td>
+                                              <div class="event-wrap">
+                                                  <h3><a href="#">{{stamp.stampName}}</a></h3>
+                                                  <div class="meta">
+                                                      <div class="categories">
+                                                          <a href="#">Inspire</a>
+                                                      </div>
+                                                      <div class="time">
+                                                          <span>05:35 AM - 08:00 AM 2h 25'</span>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                          </td>
+                                          <td>
+                                              <div class="primary-btn">
+                                                  <!-- <a (click)="onOpenModal(employee, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-original-title="Edit"> </a> -->
+                                                  <!-- <a (click)= "onOpenModal(coin, 'update')" class="btn btn-primary" href="#">Aktualizuj</a> -->
+                                              </div>
+                                          </td>
+                                          <td>
+                                              <div class="primary-btn">
+                                                  <!-- <a (click)= "onOpenModal(coin, 'delete')" class="btn btn-primary" href="#">Usuń</a> -->
+                                              </div>
+                                          </td>
+                                      </tr>
+                                  </div>    
+                              </tbody>
+                          </table>
+                      </div>
+                    </div>
+                    <div class="tab-pane fade active hidden" id="watch" role="tabpanel">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    
+                                </thead>
+                                <tbody>
+                                    <div *ngFor="let stamp of stamps">
+                                        <!-- przejście pętlą po pracownikach -->
+                                        <tr class="inner-box">
+                                            <th scope="row">
+                                                <div class="event-date">
+                                                    <p>{{stamp.dateOfProduction}}</p>
+                                                </div>
+                                            </th>
+                                            <td>
+                                                <div class="event-img">
+                                                    <img src="{{stamp.imageUrl}}" alt="" />
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="event-wrap">
+                                                    <h3><a href="#">{{stamp.stampName}}</a></h3>
+                                                    <div class="meta">
+                                                        <div class="categories">
+                                                            <a href="#">Inspire</a>
+                                                        </div>
+                                                        <div class="time">
+                                                            <span>05:35 AM - 08:00 AM 2h 25'</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="primary-btn">
+                                                    <!-- <a (click)="onOpenModal(employee, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-original-title="Edit"> </a> -->
+                                                    <!-- <a (click)= "onOpenModal(coin, 'update')" class="btn btn-primary" href="#">Aktualizuj</a> -->
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="primary-btn">
+                                                    <!-- <a (click)= "onOpenModal(coin, 'delete')" class="btn btn-primary" href="#">Usuń</a> -->
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </div>    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- /col end-->

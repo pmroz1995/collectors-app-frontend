@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Coin } from './coin';
+import { Coin } from '../model/coin';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 

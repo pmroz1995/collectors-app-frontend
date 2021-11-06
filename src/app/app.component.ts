@@ -1,8 +1,10 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Coin } from './coin';
-import { CoinService } from './coin.service';
+import { Coin } from './model/coin';
+import { CoinService } from './services/coin.service';
 import { NgForm } from '@angular/forms';
+import { Stamp } from './model/stamp';
+import { StampService } from './services/stamp.service';
 
 
 @Component({
@@ -12,9 +14,13 @@ import { NgForm } from '@angular/forms';
 })
 export class AppComponent implements OnInit{
   public coins: Coin[] | undefined;
+  public stamps: Stamp[] | undefined; 
   public deleteCoin: Coin;
 
-  constructor(private coinService: CoinService){}
+  constructor(
+    private coinService: CoinService,
+    private stampService: StampService
+  ){}
 
   public refresh(): void {
     window.location.reload();
@@ -22,7 +28,13 @@ export class AppComponent implements OnInit{
 
   ngOnInit() {
     this.getCoins();
+    this.getStamps();
   }
+
+
+  // --------------------------------------------------------------------------------------------------------//
+  // --------------------------------------------Coin--------------------------------------------------------//
+  // --------------------------------------------------------------------------------------------------------//
 
   public getCoins(): void {
     this.coinService.getCoins().subscribe(
@@ -97,5 +109,29 @@ export class AppComponent implements OnInit{
     this.refresh()
     this.getCoins()
   }  
+
+  // --------------------------------------------------------------------------------------------------------//
+  // --------------------------------------------Stamp--------------------------------------------------------//
+  // --------------------------------------------------------------------------------------------------------//
+
+  
+  public getStamps(): void {
+    this.stampService.getStamps().subscribe(
+      (response: Stamp[]) => {
+        this.stamps = response;
+
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    )
+  }
+  
+
+
+
+
+
+
 
 }
