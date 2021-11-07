@@ -27,6 +27,12 @@
                     <p>
                         Aplikacja przechowująca zbiory zegraków, znaczków oraz monet.
                     </p>
+                    <div *ngFor="let totalPrice of totalPrices">
+                      <p>
+                        {{totalPrice.totalPrice}}
+                      </p>
+                    </div>      
+                    
                 </div>
             </div>
             <!-- /.col end-->
@@ -134,7 +140,7 @@
                                           </td>
                                           <td>
                                               <div class="primary-btn">
-                                                  <!-- <a (click)= "onOpenModal(coin, 'delete')" class="btn btn-primary" href="#">Usuń</a> -->
+                                                  <a (click)= "onOpenModalStamp(stamp, 'delete')" class="btn btn-primary" href="#">Usuń</a>
                                               </div>
                                           </td>
                                       </tr>
@@ -184,7 +190,7 @@
                                             </td>
                                             <td>
                                                 <div class="primary-btn">
-                                                    <!-- <a (click)= "onOpenModal(coin, 'delete')" class="btn btn-primary" href="#">Usuń</a> -->
+                                                    <a (click)= "onOpenModalStamp(stamp, 'delete')" class="btn btn-primary" href="#">Usuń</a>
                                                 </div>
                                             </td>
                                         </tr>
@@ -273,7 +279,7 @@
   </div>
 </div>
 
-<div class="modal fade" id="deleteModalCoin" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+<div class="modal fade" id="deleteCoinModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -287,7 +293,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Zamknij</button>
-          <button type="button" (click)="onDeletCoin(deleteCoin.id)" class="btn btn-primary" data-dismiss="modal" >Usuń</button>
+          <button type="button" (click)="onDeletCoin(deleteStamp.id)" class="btn btn-primary" data-dismiss="modal" >Usuń</button>
         </div>
       </div>
     </div>
@@ -330,6 +336,26 @@
           </form>
         </div>
         
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="deleteStampModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteModalLabel">Usuń znaczek</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Czy jesteś pewien/pewna, że chcesz usunąć znaczek?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Zamknij</button>
+          <button type="button" (click)="onDeleteStamp(deleteStamp.id)" class="btn btn-primary" data-dismiss="modal" >Usuń</button>
+        </div>
       </div>
     </div>
   </div>

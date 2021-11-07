@@ -5,6 +5,8 @@ import { CoinService } from './services/coin.service';
 import { NgForm } from '@angular/forms';
 import { Stamp } from './model/stamp';
 import { StampService } from './services/stamp.service';
+import { TotalPrice } from './model/totalPrice';
+import { TotalPriceService } from './services/totalPrice.service';
 
 
 @Component({
@@ -16,11 +18,13 @@ export class AppComponent implements OnInit{
   public coins: Coin[] | undefined;
   public stamps: Stamp[] | undefined; 
   public deleteCoin: Coin;
+  public deleteStamp: Stamp;
+  public totalPrices: TotalPrice[] | undefined;
 
   constructor(
     private coinService: CoinService,
-    private stampService: StampService
-  ){}
+    private stampService: StampService,
+    private totalPriceSerice: TotalPriceService){}
 
   public refresh(): void {
     window.location.reload();
@@ -29,6 +33,7 @@ export class AppComponent implements OnInit{
   ngOnInit() {
     this.getCoins();
     this.getStamps();
+    this.getTotalPrices();
   }
 
 
@@ -48,21 +53,19 @@ export class AppComponent implements OnInit{
     )
   }
 
+
   public onOpenModal(coin: Coin, mode: string): void {
     const button = document.createElement('button');
     const container = document.getElementById('main-container');
     button.type = 'button';
     button.style.display = 'none';
     button.setAttribute('data-toggle', 'modal');
-    if (mode === 'add') {
-      button.setAttribute('data-target', '#addEmployeeModal');
-    }
     if (mode === 'update') {
       button.setAttribute('data-target', '#exampleModal');
     }
     if (mode === 'delete') {
       this.deleteCoin = coin;
-      button.setAttribute('data-target', '#deleteModalCoin');  
+      button.setAttribute('data-target', '#deleteCoinModal');  
     }
     container?.appendChild(button);
     button.click();
@@ -126,7 +129,47 @@ export class AppComponent implements OnInit{
       }
     )
   }
+
+  public getTotalPrices(): void {
+    this.totalPriceSerice.getTotalPrices().subscribe(
+      (response: TotalPrice[]) => {
+        this.totalPrices = response;
+
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    )
+  }
   
+
+  public onOpenModalStamp(stamp: Stamp, mode: string): void {
+    const button = document.createElement('button');
+    const container = document.getElementById('main-container');
+    button.type = 'button';
+    button.style.display = 'none';
+    button.setAttribute('data-toggle', 'modal');
+    if (mode === 'delete') {
+      this.deleteStamp = stamp;
+      button.setAttribute('data-target', '#deleteStampModal');
+    }
+
+    container?.appendChild(button);
+    button.click();
+  }
+
+  public onDeleteStamp(stampId: number): void {
+    this.stampService.deleteStamp(stampId).subscribe(
+      (response: void) => {
+        console.log(response);
+        },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+    this.refresh()
+    this.getStamps()
+  } 
 
   public onOpenModalStampAdd(mode: string): void {
     const button = document.createElement('button');
@@ -148,12 +191,15 @@ export class AppComponent implements OnInit{
       (response: Stamp) => {
         this.getStamps;
         console.log(response);
+        addFormStamp.reset
+        
       },
       (error: HttpErrorResponse) => {
         this.stampService.getStamps();
         alert(error.message);
       }
     );
+    this.refresh
   }
 
 

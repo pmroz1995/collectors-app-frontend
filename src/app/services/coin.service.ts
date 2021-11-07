@@ -29,4 +29,8 @@ export class CoinService {
       return this.http.delete<void>(`${this.apiServerUrl}/api/coin/delete/${id}`);
     }
 
+    public getTotalPrice(): Observable<number> {
+      return this.http.get<number>(`${this.apiServerUrl}/api/totalPrice/get/`)
+    }
+
 }
