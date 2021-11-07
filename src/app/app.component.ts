@@ -62,7 +62,7 @@ export class AppComponent implements OnInit{
     }
     if (mode === 'delete') {
       this.deleteCoin = coin;
-      button.setAttribute('data-target', '#deleteModal');  
+      button.setAttribute('data-target', '#deleteModalCoin');  
     }
     container?.appendChild(button);
     button.click();
@@ -128,9 +128,33 @@ export class AppComponent implements OnInit{
   }
   
 
+  public onOpenModalStampAdd(mode: string): void {
+    const button = document.createElement('button');
+    const container = document.getElementById('main-container');
+    button.type = 'button';
+    button.style.display = 'none';
+    button.setAttribute('data-toggle', 'modal');
+    if (mode === 'add') {
+      button.setAttribute('data-target', '#addStampModal');
+    }
+    container?.appendChild(button);
+    button.click();
+  }
 
 
-
+  public onAddStamp(addFormStamp: NgForm): void {
+    document.getElementById("add-stamp-button-id")?.click();
+    this.stampService.addStamp(addFormStamp.value).subscribe(
+      (response: Stamp) => {
+        this.getStamps;
+        console.log(response);
+      },
+      (error: HttpErrorResponse) => {
+        this.stampService.getStamps();
+        alert(error.message);
+      }
+    );
+  }
 
 
 

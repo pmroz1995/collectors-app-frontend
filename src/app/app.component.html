@@ -11,7 +11,7 @@
         <li>
             <div class="primary-btn">
                 <!-- <a (click)="onOpenModal(employee, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-original-title="Edit"> </a> -->
-                <a (click)= "onOpenModalAdd( 'add')" class="btn btn-primary" href="#">Dodaj monete</a>
+                <a (click)= "onOpenModalStampAdd('add')" class="btn btn-primary" href="#">Dodaj znaczek</a>
             </div>
         </li>
     </ul>    
@@ -36,10 +36,10 @@
             <div class="col-lg-12">
                 <ul class="nav custom-tab" id="myTab" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active show" id="coin-tab" data-toggle="tab" href="#coin" role="tab" aria-selected="true">Monety</a>
+                        <a class="nav-link active show" id="coin-tab" data-toggle="tab" href="#coin" role="tab" aria-controls="home" aria-selected="true">Monety</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#stamp" role="tab" aria-selected="false">Znaczki</a>
+                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#stamp" role="tab" aria-controls="profile" aria-selected="false">Znaczki</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="contact-tab" data-toggle="tab" href="#watch" role="tab" aria-controls="contact" aria-selected="false">Zegraki</a>
@@ -73,7 +73,7 @@
                                                             <h6><p>waga: {{coin.weight}} gram<br></p></h6>
                                                         </div>
                                                         <div class="time">
-                                                            <h6><p>prize: {{coin.prizePln}} pln</p></h6>
+                                                            <h6><p>Wartość: {{coin.prizePln}} pln</p></h6>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -116,17 +116,15 @@
                                               </div>
                                           </td>
                                           <td>
-                                              <div class="event-wrap">
-                                                  <h3><a href="#">{{stamp.stampName}}</a></h3>
-                                                  <div class="meta">
-                                                      <div class="categories">
-                                                          <a href="#">Inspire</a>
-                                                      </div>
-                                                      <div class="time">
-                                                          <span>05:35 AM - 08:00 AM 2h 25'</span>
-                                                      </div>
-                                                  </div>
-                                              </div>
+                                            <div class="event-wrap">
+                                                <h3>{{stamp.stampName}}</h3>
+                                                <div class="meta">
+                                                    <div class="organizers">
+                                                        <h6><p>Wartość: {{stamp.prizePln}} PLN<br></p></h6>
+                                                    </div>
+                                                    
+                                                </div>
+                                            </div>
                                           </td>
                                           <td>
                                               <div class="primary-btn">
@@ -249,6 +247,11 @@
             <label for="recipient-name" class="col-form-label">Kruszec</label>
             <input type="text" ngModel name ="ore" class="form-control" id="oreId">
           </div>
+
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Cena w PLN</label>
+            <input type="text" ngModel name ="prizePln" class="form-control" id="priceId">
+          </div>
           
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">data produkcji (RRRR/MM/DD)</label>
@@ -270,7 +273,7 @@
   </div>
 </div>
 
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+<div class="modal fade" id="deleteModalCoin" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -286,6 +289,47 @@
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Zamknij</button>
           <button type="button" (click)="onDeletCoin(deleteCoin.id)" class="btn btn-primary" data-dismiss="modal" >Usuń</button>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="addStampModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Dodaj znaczek</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form #addFormStamp="ngForm" (ngSubmit)="onAddStamp(addFormStamp)">
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">Nazwa znaczka</label>
+              <input type="text" ngModel name="stampName" class="form-control" id="stampName">
+            </div>
+            
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">data wydania (RRRR/MM/DD)</label>
+              <input type="text" ngModel name ="dateOfProduction" class="form-control" id="dataOfProductionId">
+            </div>
+            
+            <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Cena w PLN</label>
+                <input type="text" ngModel name ="prizePln" class="form-control" id="dataOfProductionId">
+            </div>
+
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">Link do źródła obrazka</label>
+              <input type="text" ngModel name ="imageUrl" class="form-control" id="imageUrlID">
+            </div>
+            <div class="modal-footer">
+              <button type="button" id="add-stamp-button-id" class="btn btn-secondary" data-dismiss="modal">Zamknij</button>
+              <button [disabled]="addFormStamp.invalid" type="submit" class="btn btn-primary">Dodaj znaczek</button>
+            </div>
+          </form>
+        </div>
+        
       </div>
     </div>
   </div>
