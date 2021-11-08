@@ -24,13 +24,18 @@
                     <div class="title-text">
                         <h2>Aplikacja dla kolekcjonerów</h2>
                     </div>
-                    <p>
-                        Aplikacja przechowująca zbiory zegraków, znaczków oraz monet.
-                    </p>
-                    <div *ngFor="let totalPrice of totalPrices">
+                    <h4>
                       <p>
-                        {{totalPrice.totalPrice}}
+                          Aplikacja przechowująca zbiory zegraków, znaczków oraz monet.
                       </p>
+                    </h4>  
+                      
+                    <div *ngFor="let totalPrice of totalPrices">
+                      <h5>
+                        <p>
+                          Całkowita Wartość zbiorów: {{totalPrice.totalPrice}} PLN
+                      </p>
+                    </h5>
                     </div>      
                     
                 </div>
@@ -270,7 +275,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" id="add-coin-button-id" class="btn btn-secondary" data-dismiss="modal">Zamknij</button>
-            <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary">Dodaj monete</button>
+            <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary" >Dodaj monete</button>
           </div>
         </form>
       </div>
@@ -293,7 +298,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Zamknij</button>
-          <button type="button" (click)="onDeletCoin(deleteStamp.id)" class="btn btn-primary" data-dismiss="modal" >Usuń</button>
+          <button type="button" (click)="onDeletCoin(deleteCoin.id)" class="btn btn-primary" data-dismiss="modal" >Usuń</button>
         </div>
       </div>
     </div>

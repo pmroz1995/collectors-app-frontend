@@ -89,8 +89,11 @@ export class AppComponent implements OnInit{
     this.coinService.addCoins(addForm.value).subscribe(
       (response: Coin) => {
         this.getCoins();
+        this.getTotalPrices()
         console.log(response);
         addForm.reset();
+        this.refresh()
+
       },
       (error: HttpErrorResponse) => {
         this.coinService.getCoins();
@@ -189,9 +192,9 @@ export class AppComponent implements OnInit{
     document.getElementById("add-stamp-button-id")?.click();
     this.stampService.addStamp(addFormStamp.value).subscribe(
       (response: Stamp) => {
-        this.getStamps;
+        this.getStamps();
         console.log(response);
-        addFormStamp.reset
+        addFormStamp.reset()
         
       },
       (error: HttpErrorResponse) => {
@@ -199,7 +202,6 @@ export class AppComponent implements OnInit{
         alert(error.message);
       }
     );
-    this.refresh
   }
 
 
