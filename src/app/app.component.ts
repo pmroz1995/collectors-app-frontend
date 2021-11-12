@@ -20,6 +20,7 @@ export class AppComponent implements OnInit{
   public coins: Coin[] | undefined;
   public stamps: Stamp[] | undefined; 
   public deleteCoin: Coin;
+  public updateCoin: Coin;
   public deleteStamp: Stamp;
   public updateStamp: Stamp;
   public totalPrices: TotalPrice[] | undefined;
@@ -67,7 +68,8 @@ export class AppComponent implements OnInit{
     button.style.display = 'none';
     button.setAttribute('data-toggle', 'modal');
     if (mode === 'update') {
-      button.setAttribute('data-target', '#exampleModal');
+      this.updateCoin = coin;
+      button.setAttribute('data-target', '#updateCoinModal');
     }
     if (mode === 'delete') {
       this.deleteCoin = coin;
@@ -95,10 +97,8 @@ export class AppComponent implements OnInit{
     this.coinService.addCoins(addForm.value).subscribe(
       (response: Coin) => {
         this.getCoins();
-        this.getTotalPrices()
         console.log(response);
         addForm.reset();
-        this.refresh()
 
       },
       (error: HttpErrorResponse) => {
@@ -108,7 +108,7 @@ export class AppComponent implements OnInit{
       }
     );
   }
-
+  
   public onDeletCoin(coinId: number): void {
     this.coinService.deleteCoin(coinId).subscribe(
       (response: void) => {
@@ -121,6 +121,19 @@ export class AppComponent implements OnInit{
     this.refresh()
     this.getCoins()
   }  
+
+  public onUpdateCoin(coin: Coin): void {
+    this.coinService.updateCoin(coin).subscribe(
+      (response: Coin) => {
+        console.log(response);
+        this.getCoins();
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+      
+    );
+  }
 
   // --------------------------------------------------------------------------------------------------------//
   // --------------------------------------------Stamp--------------------------------------------------------//
