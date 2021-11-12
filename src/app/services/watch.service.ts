@@ -17,5 +17,16 @@ export class WatchService {
         return this.http.get<any>(this.apiServerUrl + "/api/watch/all");
     }
 
+    public addWatch(watch: Watch): Observable<Watch> {
+      return this.http.post<Watch>(`${this.apiServerUrl}/api/watch/add`, watch);
+    }
+
+    public updateWatch(watch: Watch): Observable<Watch> {
+      return this.http.put<Watch>(`${this.apiServerUrl}/api/watch/update`, watch);
+    }
+
+    public deleteWatch(id: number): Observable<void> {
+      return this.http.delete<void>(`${this.apiServerUrl}/api/watch/delete/${id}`);
+    }
 
 }

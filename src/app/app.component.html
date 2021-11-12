@@ -14,6 +14,12 @@
                 <a (click)= "onOpenModalStampAdd('add')" class="btn btn-primary" href="#">Dodaj znaczek</a>
             </div>
         </li>
+        <li>
+          <div class="primary-btn">
+              <!-- <a (click)="onOpenModal(employee, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-original-title="Edit"> </a> -->
+              <a (click)= "onOpenModalWatchAdd('add')" class="btn btn-primary" href="#">Dodaj zegarek</a>
+          </div>
+      </li>
     </ul>    
 </nav>
 <div class="event-schedule-area-two bg-color pad100">
@@ -190,12 +196,12 @@
                                             <td>
                                                 <div class="primary-btn">
                                                     <!-- <a (click)="onOpenModal(employee, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-original-title="Edit"> </a> -->
-                                                    <!-- <a (click)= "onOpenModal(coin, 'update')" class="btn btn-primary" href="#">Aktualizuj</a> -->
+                                                    <a (click)= "onOpenModalWatch(watch, 'update')" class="btn btn-primary" href="#">Aktualizuj</a>
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="primary-btn">
-                                                    <!-- <a (click)= "onOpenModalStamp(stamp, 'delete')" class="btn btn-primary" href="#">Usuń</a> -->
+                                                    <a (click)= "onOpenModalWatch(watch, 'delete')" class="btn btn-primary" href="#">Usuń</a>
                                                 </div>
                                             </td>
                                         </tr>
@@ -452,6 +458,116 @@
           </form>
         </div>
         
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="addWatchModal" tabindex="-1" role="dialog" aria-labelledby="addWatchModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addWatchModalLabel">Dodaj zegarek</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form #addWatchForm="ngForm" (ngSubmit)="onAddWatch(addWatchForm)">
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">Nazwa zegarka</label>
+              <input type="text" ngModel name="watchName" class="form-control" id="coinName">
+            </div>
+            
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">Waga</label>
+              <input type="text" ngModel name ="weight" class="form-control" id="weightId">
+            </div>
+
+  
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">Cena w PLN</label>
+              <input type="text" ngModel name ="prizePln" class="form-control" id="priceId">
+            </div>
+            
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">data produkcji (RRRR/MM/DD)</label>
+              <input type="text" ngModel name ="dateOfProduction" class="form-control" id="dataOfProductionId">
+            </div>
+            
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">Link do źródła obrazka</label>
+              <input type="text" ngModel name ="imageUrl" class="form-control" id="imageUrlID">
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" id="add-coin-button-id" class="btn btn-secondary" data-dismiss="modal">Zamknij</button>
+              <button [disabled]="addWatchForm.invalid" type="submit" class="btn btn-primary" >Dodaj zegarek</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="updateWatchModal" tabindex="-1" role="dialog" aria-labelledby="updateWatchModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="updateWatchModalLabel">Aktualizuj zegarek</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form #updateWatchFormOk="ngForm">
+            <input type="hidden" ngModel="{{updateWatch?.id}}" name="id" class="form-control" id="id">
+            <input type="hidden" ngModel="{{updateWatch?.watchCode}}" name="watchCode" class="form-control" id="watchCodeid">
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">Nazwa zegarka</label>
+              <input type="text" ngModel="{{updateWatch?.watchName}}" name="watchName" class="form-control" id="stampName">
+            </div>
+            
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">data wydania (RRRR/MM/DD)</label>
+              <input type="text" ngModel="{{updateWatch?.dateOfProduction}}" name ="dateOfProduction" class="form-control" id="dataOfProductionId">
+            </div>
+            
+            <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Cena w PLN</label>
+                <input type="text" ngModel="{{updateWatch?.prizePln}}" name ="prizePln" class="form-control" id="dataOfProductionId">
+            </div>
+
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">Link do źródła obrazka</label>
+              <input type="text" ngModel="{{updateWatch?.imageUrl}}" name ="imageUrl" class="form-control" id="imageUrlID">
+            </div>
+            <div class="modal-footer">
+              <button type="button" id="add-stamp-button-id" class="btn btn-secondary" data-dismiss="modal">Zamknij</button>
+              <button (click)="onUpdateWatch(updateWatchFormOk.value)" data-dismiss="modal" class="btn btn-primary">Aktualizuj znaczek</button>
+            </div>
+          </form>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="deleteWatchModal" tabindex="-1" role="dialog" aria-labelledby="deleteWatchModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteWatchModalLabel">Usuń zegarek</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Czy jesteś pewien/pewna, że chcesz usunąć zegarek?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Zamknij</button>
+          <button type="button" (click)="onDeleteWatch(deleteWatch.id)" class="btn btn-primary" data-dismiss="modal" >Usuń</button>
+        </div>
       </div>
     </div>
   </div>
