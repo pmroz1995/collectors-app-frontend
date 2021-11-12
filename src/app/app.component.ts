@@ -7,6 +7,8 @@ import { Stamp } from './model/stamp';
 import { StampService } from './services/stamp.service';
 import { TotalPrice } from './model/totalPrice';
 import { TotalPriceService } from './services/totalPrice.service';
+import { Watch } from './model/watch';
+import { WatchService } from './services/watch.service';
 
 
 @Component({
@@ -19,12 +21,15 @@ export class AppComponent implements OnInit{
   public stamps: Stamp[] | undefined; 
   public deleteCoin: Coin;
   public deleteStamp: Stamp;
+  public updateStamp: Stamp;
   public totalPrices: TotalPrice[] | undefined;
+  public watches: Watch[] | undefined;
 
   constructor(
     private coinService: CoinService,
     private stampService: StampService,
-    private totalPriceSerice: TotalPriceService){}
+    private totalPriceSerice: TotalPriceService,
+    private watchService: WatchService){}
 
   public refresh(): void {
     window.location.reload();
@@ -34,6 +39,7 @@ export class AppComponent implements OnInit{
     this.getCoins();
     this.getStamps();
     this.getTotalPrices();
+    this.getWatches();
   }
 
 
@@ -156,6 +162,10 @@ export class AppComponent implements OnInit{
       this.deleteStamp = stamp;
       button.setAttribute('data-target', '#deleteStampModal');
     }
+    if (mode === 'update') {
+      this.updateStamp = stamp;
+      button.setAttribute('data-target', '#updateStampModal');
+    }
 
     container?.appendChild(button);
     button.click();
@@ -204,6 +214,34 @@ export class AppComponent implements OnInit{
     );
   }
 
+  public onUpdateStamp(stamp: Stamp): void {
+    this.stampService.updateStamp(stamp).subscribe(
+      (response: Stamp) => {
+        console.log(response);
+        this.getStamps();
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+      
+    );
+  }
+
+    // --------------------------------------------------------------------------------------------------------//
+    // -------------------------------------------Watch--------------------------------------------------------//
+    // --------------------------------------------------------------------------------------------------------//
+
+    public getWatches(): void {
+      this.watchService.getWatches().subscribe(
+        (response: Watch[]) => {
+          this.watches = response;
+  
+        },
+        (error: HttpErrorResponse) => {
+          alert(error.message);
+        }
+      )
+    }
 
 
 }
