@@ -9,6 +9,8 @@ import { TotalPrice } from './model/totalPrice';
 import { TotalPriceService } from './services/totalPrice.service';
 import { Watch } from './model/watch';
 import { WatchService } from './services/watch.service';
+import { TokenStorageService } from './services/login/token-storage.service';
+
 
 
 @Component({
@@ -28,11 +30,18 @@ export class AppComponent implements OnInit{
   public updateWatch: Watch;
   public deleteWatch: Watch;
 
+  private roles: string[];
+  isLoggedIn = false;
+  showAdminBoard = false;
+  showModeratorBoard = false;
+  username: string;
+
   constructor(
     private coinService: CoinService,
     private stampService: StampService,
     private totalPriceSerice: TotalPriceService,
-    private watchService: WatchService){}
+    private watchService: WatchService,
+    private tokenStorageService: TokenStorageService){}
 
   public refresh(): void {
     window.location.reload();
@@ -43,8 +52,23 @@ export class AppComponent implements OnInit{
     this.getStamps();
     this.getTotalPrices();
     this.getWatches();
+    this.isLoggedIn = !!this.tokenStorageService.getToken();
+
+    if (this.isLoggedIn) {
+      const user = this.tokenStorageService.getUser();
+      this.roles = user.roles;
+
+      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+      this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
+
+      this.username = user.username;
+    }
   }
 
+  logout() {
+    this.tokenStorageService.signOut();
+    window.location.reload();
+  }
 
   // --------------------------------------------------------------------------------------------------------//
   // --------------------------------------------Coin--------------------------------------------------------//
