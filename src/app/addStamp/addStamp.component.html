@@ -1,0 +1,46 @@
+
+    <form #addStampForm="ngForm" (ngSubmit)="onAddStamp(addStampForm)">
+      <div class="form-group">
+        <label for="recipient-name" class="col-form-label">Nazwa znaczka</label>
+        <input type="text" ngModel name="stampName" class="form-control" id="stampName" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="recipient-name" class="col-form-label">data wydania (RRRR/MM/DD)</label>
+        <input type="text" ngModel name ="dateOfProduction" class="form-control" id="dataOfProductionId" required>
+      </div>
+      
+      <div class="form-group">
+          <label for="recipient-name" class="col-form-label">Cena w PLN</label>
+          <input type="text" ngModel name ="prizePln" class="form-control" id="dataOfProductionId" required>
+      </div>
+
+      <div class="form-group">
+        <label for="recipient-name" class="col-form-label">Link do źródła obrazka</label>
+        <input type="text" ngModel name ="imageUrl" class="form-control" id="imageUrlID" required>
+      </div>
+      <div class="modal-footer">
+        <button [disabled]="addStampForm.invalid"  data-toggle="modal" data-target="#addedStampModal" class="btn btn-primary" >Dodaj znaczek</button>
+      </div>
+    </form>
+
+
+
+<div class="modal fade" id="addedStampModal" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel">Znaczek dodany</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Znaczek dodany
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Zamknij</button>
+      </div>
+    </div>
+  </div>
+</div>

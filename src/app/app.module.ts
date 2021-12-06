@@ -17,6 +17,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
 import { AddWatch } from './addWatch/addWatch.component';
 import { AddCoin } from './addCoin/addCoin.component';
+import { AddStamp } from './addStamp/addStamp.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { AddCoin } from './addCoin/addCoin.component';
     BoardModeratorComponent,
     ProfileComponent,
     AddWatch,
-    AddCoin
+    AddCoin,
+    AddStamp
   ],
   imports: [
     BrowserModule,

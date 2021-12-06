@@ -11,6 +11,7 @@ import { BoardAdminComponent } from './board-admin/board-admin.component';
 import { AppComponent } from './app.component';
 import { AddWatch } from './addWatch/addWatch.component';
 import { AddCoin } from './addCoin/addCoin.component';
+import { AddStamp } from './addStamp/addStamp.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -20,9 +21,10 @@ const routes: Routes = [
   { path: 'user', component: BoardUserComponent },
   { path: 'mod', component: BoardModeratorComponent },
   { path: 'admin', component: BoardAdminComponent },
-  { path: '', component: HomeComponent },
+  { path: '', component: BoardUserComponent },
   { path: 'addWatch', component: AddWatch },
   { path: 'addCoin', component: AddCoin },
+  { path: 'addStamp', component: AddStamp },
   // { path: '', redirectTo: 'user', pathMatch: 'full' }
 ];
 
