@@ -4,18 +4,41 @@ import {HttpClientModule} from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { CoinService } from './services/coin.service';
 import { FormsModule } from '@angular/forms';
+import { AppRoutingModule } from './app-routing.module';
+
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { HomeComponent } from './home/home.component';
+import { BoardAdminComponent } from './board-admin/board-admin.component';
+import { BoardUserComponent } from './board-user/board-user.component';
+import { BoardModeratorComponent } from './board-moderator/board-moderator.component';
+import { ProfileComponent } from './profile/profile.component';
+
+import { authInterceptorProviders } from './_helpers/auth.interceptor';
+import { AddWatch } from './addWatch/addWatch.component';
+import { AddCoin } from './addCoin/addCoin.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent,
+    RegisterComponent,
+    HomeComponent,
+    BoardAdminComponent,
+    BoardUserComponent,
+    BoardModeratorComponent,
+    ProfileComponent,
+    AddWatch,
+    AddCoin
   ],
   imports: [
     BrowserModule,
+    AppRoutingModule,
     HttpClientModule, 
     FormsModule
   ],
-  providers: [CoinService],
+  providers: [authInterceptorProviders], 
   bootstrap: [AppComponent]
 })
 export class AppModule { }
