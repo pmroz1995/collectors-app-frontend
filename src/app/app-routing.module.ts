@@ -21,7 +21,7 @@ const routes: Routes = [
   { path: 'user', component: BoardUserComponent },
   { path: 'mod', component: BoardModeratorComponent },
   { path: 'admin', component: BoardAdminComponent },
-  { path: '', component: BoardUserComponent },
+  { path: '', component: HomeComponent },
   { path: 'addWatch', component: AddWatch },
   { path: 'addCoin', component: AddCoin },
   { path: 'addStamp', component: AddStamp },
