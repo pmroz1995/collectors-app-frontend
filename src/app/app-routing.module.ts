@@ -9,6 +9,8 @@ import { BoardUserComponent } from './board-user/board-user.component';
 import { BoardModeratorComponent } from './board-moderator/board-moderator.component';
 import { BoardAdminComponent } from './board-admin/board-admin.component';
 import { AppComponent } from './app.component';
+import { AddWatch } from './addWatch/addWatch.component';
+import { AddCoin } from './addCoin/addCoin.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -18,8 +20,9 @@ const routes: Routes = [
   { path: 'user', component: BoardUserComponent },
   { path: 'mod', component: BoardModeratorComponent },
   { path: 'admin', component: BoardAdminComponent },
-  { path: '', component: AppComponent },
-  { path: 'addWatch', component: BoardAdminComponent },
+  { path: '', component: HomeComponent },
+  { path: 'addWatch', component: AddWatch },
+  { path: 'addCoin', component: AddCoin },
   // { path: '', redirectTo: 'user', pathMatch: 'full' }
 ];
 

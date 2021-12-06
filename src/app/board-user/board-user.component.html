@@ -1,25 +1,25 @@
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-white">
     <ul class="nav navbar-nav" >
-        <li>
+        <!-- <li>
             <div class="primary-btn">
-                <!-- <a (click)="onOpenModal(employee, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-original-title="Edit"> </a> -->
+                <a (click)="onOpenModal(employee, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-original-title="Edit"> </a>
                 <a (click)= "onOpenModalAdd('add')" class="btn btn-primary" href="#">Dodaj monete</a>
             </div>
             
         </li>
         <li>
             <div class="primary-btn">
-                <!-- <a (click)="onOpenModal(employee, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-original-title="Edit"> </a> -->
+                <a (click)="onOpenModal(employee, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-original-title="Edit"> </a>
                 <a (click)= "onOpenModalStampAdd('add')" class="btn btn-primary" href="#">Dodaj znaczek</a>
             </div>
         </li>
         <li>
           <div class="primary-btn">
-              <!-- <a (click)="onOpenModal(employee, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-original-title="Edit"> </a> -->
+              <a (click)="onOpenModal(employee, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-original-title="Edit"> </a>
               <a (click)= "onOpenModalWatchAdd('add')" class="btn btn-primary" href="#">Dodaj zegarek</a>
           </div>
-      </li>
+      </li> -->
     </ul>    
   </nav>
 <div class="event-schedule-area-two bg-color pad100">
@@ -27,21 +27,21 @@
       <div class="row">
           <div class="col-lg-12">
               <div class="section-title text-center">
-                  <div class="title-text">
+                  <!-- <div class="title-text">
                       <h2>Aplikacja dla kolekcjonerów</h2>
                   </div>
                   <h4>
                     <p>
                         Aplikacja przechowująca zbiory zegarków, znaczków oraz monet.
                     </p>
-                  </h4>  
+                  </h4>   -->
                     
                   <div *ngFor="let totalPrice of totalPrices">
-                    <h5>
+                    <h2>
                       <p>
                         Całkowita Wartość zbiorów: {{totalPrice.totalPrice}} PLN
                     </p>
-                  </h5>
+                  </h2>
                   </div>      
                   
               </div>
