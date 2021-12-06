@@ -3,7 +3,6 @@ import { Observable } from 'rxjs';
 import { Stamp } from '../model/stamp';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { TokenStorageService } from 'src/app/services/login/token-storage.service';
 
 @Injectable({
   providedIn: 'root',
@@ -12,8 +11,7 @@ export class StampService {
 
   private apiServerUrl = environment.apiUrl;
 
-  constructor(private http: HttpClient,
-    private token: TokenStorageService) { }
+  constructor(private http: HttpClient) { }
 
     public getStamps(): Observable<Stamp[]> {
         return this.http.get<any>(this.apiServerUrl + "/api/stamp/all");
@@ -28,10 +26,6 @@ export class StampService {
     }
 
     public deleteStamp(id: number): Observable<void> {
-      const headers = new Headers({
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.token}`
-      })
       return this.http.delete<void>(`${this.apiServerUrl}/api/stamp/delete/${id}`);
     }
 
